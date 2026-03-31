@@ -39,7 +39,8 @@ const NAV_LINK_IDS = [
   { id: "contact",   key: "contact" },
 ] as const;
 
-const HERO_BG     = "/background.jpeg";
+
+const HERO_BG     = "/";
 const HERO_CUTOUT = "/acceuil1.jpeg";
 
 const HERO_STATS = [
@@ -410,7 +411,7 @@ export default function App() {
           transition={reduced ? undefined : { duration: 1.2, delay: 0.3, ease: "easeOut" }}
           src={HERO_CUTOUT}
           alt="Portrait de Claudio Njalla"
-          className="absolute bottom-0 right-0 z-[1] hidden h-[86vh] object-contain md:block"
+          className="absolute bottom-0 right-0 z-[1] h-[45vh] object-contain opacity-20 md:h-[86vh] md:opacity-90"
           style={{ filter: "drop-shadow(0 0 60px rgba(var(--accent-rgb),0.30))", opacity: 0.88 }}
         />
 
