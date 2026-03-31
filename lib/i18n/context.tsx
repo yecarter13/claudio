@@ -14,7 +14,7 @@ interface I18nCtx {
 
 const I18nContext = createContext<I18nCtx>({
   lang: "fr",
-  t: fr,
+  t: { ...fr, lang: "fr" as Lang },
   setLang: () => {},
 });
 
