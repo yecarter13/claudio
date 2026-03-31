@@ -22,8 +22,8 @@ export const ABOUT = {
     { year: "2018", event: "Premiers sketchs viraux sur Facebook" },
     { year: "2020", event: "Lancement de l'émission Pop The Balloon" },
     { year: "2021", event: "Rôle principal dans Impossible Love" },
-    { year: "2022", event: "Sortie du titre musical FIN · 1M de vues" },
-    { year: "2023", event: "Partenariat Tecno Cameroun · 3M abonnés" },
+    { year: "2022", event: "Sortie du titre musical FIN · 120K de vues" },
+    { year: "2023", event: "Partenariat Tecno Cameroun · 108K abonnés" },
     { year: "2024", event: "4M+ abonnés toutes plateformes confondues" },
   ],
   vision:
