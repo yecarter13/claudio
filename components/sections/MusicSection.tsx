@@ -4,6 +4,7 @@ import { Play, Music2, ExternalLink } from "lucide-react";
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { TRACKS, ytThumb } from "@/lib/data";
+import { useI18n } from "@/lib/i18n/context";
 import { RevealSection } from "@/components/ui/RevealSection";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
@@ -53,6 +54,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 export function MusicSection() {
   const reduced = useReducedMotion();
+  const { t } = useI18n();
 
   const trackCards = TRACKS.map((track) => ({
     key: track.title,
@@ -126,14 +128,12 @@ export function MusicSection() {
         aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-4 md:px-8">
-        <SectionLabel>MUSIQUE</SectionLabel>
+        <SectionLabel>{t.music.label}</SectionLabel>
         <motion.h2 variants={fadeUp} className="font-display mt-6 text-4xl font-bold text-[var(--text-primary)] md:text-6xl">
-          Quand je ne vous fais pas rire…{" "}
-          <span className="gradient-text">je vous fais ressentir.</span>
+          {t.music.heading}{" "}
+          <span className="gradient-text">{t.music.accent}</span>
         </motion.h2>
-        <motion.p variants={fadeUp} className="mt-4 max-w-2xl text-[var(--text-secondary)]">
-          La musique, c'est mon côté le plus intime.
-        </motion.p>
+        <motion.p variants={fadeUp} className="mt-4 max-w-2xl text-[var(--text-secondary)]">{t.music.sub}</motion.p>
 
         {/* Mobile: Swiper — Desktop: grid */}
         <div className="mt-12 md:hidden">

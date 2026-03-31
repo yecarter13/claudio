@@ -4,6 +4,7 @@ import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, ChevronUp, Menu, Sun, Moon, X, Film, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useI18n } from "@/lib/i18n/context";
 
 // Above-fold sections — loaded immediately
 import { AboutSection }   from "@/components/sections/AboutSection";
@@ -29,17 +30,17 @@ const FOOTER_QUOTE        = "Merci d'être passé. Revenez souvent — j'ai touj
 
 const TYPEWRITER_ROLES = ["Comedian", "Influencer", "Actor", "Music Artist"] as const;
 
-const NAV_LINKS = [
-  { id: "about",     label: "About"   },
-  { id: "films",     label: "Films"   },
-  { id: "music",     label: "Music"   },
-  { id: "shows",     label: "Shows"   },
-  { id: "influence", label: "Digital" },
-  { id: "contact",   label: "Contact" },
+const NAV_LINK_IDS = [
+  { id: "about",     key: "about"   },
+  { id: "films",     key: "films"   },
+  { id: "music",     key: "music"   },
+  { id: "shows",     key: "shows"   },
+  { id: "influence", key: "digital" },
+  { id: "contact",   key: "contact" },
 ] as const;
 
-const HERO_BG     = "https://placehold.co/1920x1080/0b1120/1e293b?text=.";
-const HERO_CUTOUT = "https://placehold.co/600x900/1e293b/60a5fa?text=CLAUDIO";
+const HERO_BG     = "/background.jpeg";
+const HERO_CUTOUT = "/acceuil1.jpeg";
 
 const HERO_STATS = [
   { key: "tiktok",    label: "TikTok",    count: "2.4M" },
@@ -48,6 +49,14 @@ const HERO_STATS = [
   { key: "instagram", label: "Instagram", count: "181K" },
   { key: "youtube",   label: "YouTube",   count: "219K" },
 ] as const;
+
+const HERO_BRAND_COLORS: Record<string, string> = {
+  tiktok:    "text-[#6366f1]",
+  facebook:  "text-[#1877F2]",
+  snapchat:  "text-[#F7C600]",
+  youtube:   "text-[#FF0000]",
+  instagram: "text-[#E4405F]",
+};
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -120,12 +129,90 @@ function GridLines() {
   );
 }
 
+/* ── Flag SVGs — cercles simples avec couleurs de marque ────────── */
+function FlagFR({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 18 18" aria-hidden="true" style={{ display: "block", flexShrink: 0 }}>
+      <circle cx="9" cy="9" r="9" fill="#ED2939" />
+      <rect x="0" y="0" width="12" height="18" fill="#fff" />
+      <rect x="0" y="0" width="6" height="18" fill="#002395" />
+    </svg>
+  );
+}
+
+function FlagEN({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 18 18" aria-hidden="true" style={{ display: "block", flexShrink: 0 }}>
+      <circle cx="9" cy="9" r="9" fill="#012169" />
+      {/* White diagonals */}
+      <line x1="0" y1="0" x2="18" y2="18" stroke="#fff" strokeWidth="3.5" />
+      <line x1="18" y1="0" x2="0" y2="18" stroke="#fff" strokeWidth="3.5" />
+      {/* Red diagonals */}
+      <line x1="0" y1="0" x2="18" y2="18" stroke="#C8102E" strokeWidth="2" />
+      <line x1="18" y1="0" x2="0" y2="18" stroke="#C8102E" strokeWidth="2" />
+      {/* White cross */}
+      <rect x="7.5" y="0" width="3" height="18" fill="#fff" />
+      <rect x="0" y="7.5" width="18" height="3" fill="#fff" />
+      {/* Red cross */}
+      <rect x="8" y="0" width="2" height="18" fill="#C8102E" />
+      <rect x="0" y="8" width="18" height="2" fill="#C8102E" />
+    </svg>
+  );
+}
+
+/* ── Lang Switch — pill camembert avec indicateur glissant ──────── */
+function LangSwitch({ lang, setLang, compact = false }: {
+  lang: string;
+  setLang: (l: "fr" | "en") => void;
+  compact?: boolean;
+}) {
+  return (
+    <div className="relative flex items-center rounded-full border border-[var(--border-card)] bg-[var(--bg-secondary)] p-0.5">
+      {/* Sliding pill indicator */}
+      <motion.div
+        layout
+        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+        className="absolute top-0.5 bottom-0.5 rounded-full bg-[var(--accent)] shadow-sm"
+        style={{
+          width: "calc(50% - 2px)",
+          left: lang === "fr" ? "2px" : "calc(50%)",
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => setLang("fr")}
+        className={`relative z-10 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-150 ${lang === "fr" ? "text-white" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`}
+        aria-label="Français"
+      >
+        <FlagFR size={compact ? 14 : 16} />
+        {!compact && <span>FR</span>}
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        className={`relative z-10 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors duration-150 ${lang === "en" ? "text-white" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`}
+        aria-label="English"
+      >
+        <FlagEN size={compact ? 14 : 16} />
+        {!compact && <span>EN</span>}
+      </button>
+    </div>
+  );
+}
+
 /* ── Navbar ────────────────────────────────────────────────────── */
 function TopBar({ hasScrolled, activeSection, isMobileMenuOpen, setIsMobileMenuOpen, jumpTo, theme, toggleTheme, isMounted }: {
   hasScrolled: boolean; activeSection: string;
   isMobileMenuOpen: boolean; setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   jumpTo: (id: string) => void; theme: string; toggleTheme: () => void; isMounted: boolean;
 }) {
+  const { t, lang, setLang } = useI18n();
+
+  const NAV_LINKS = NAV_LINK_IDS.map((l) => ({
+    id: l.id,
+    label: t.nav[l.key as keyof typeof t.nav],
+  }));
+
   return (
     <motion.header
       initial={{ y: -48, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
@@ -153,18 +240,23 @@ function TopBar({ hasScrolled, activeSection, isMobileMenuOpen, setIsMobileMenuO
               <span className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-[var(--accent)] transition-all duration-300 ${activeSection === link.id ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-60"}`} />
             </button>
           ))}
+
+          {/* Lang switch — toujours visible */}
+          <LangSwitch lang={lang} setLang={setLang} />
+
           {isMounted && (
             <button onClick={toggleTheme} className="rounded-full p-2 text-[var(--text-secondary)] transition-all hover:bg-[var(--accent-light)] hover:text-[var(--accent)]" aria-label="Basculer le thème">
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
           )}
           <a href="#contact" className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 hover:shadow-[0_4px_16px_var(--glow)]">
-            Book Me
+            {t.nav.bookMe}
           </a>
         </nav>
 
         {/* Mobile */}
         <div className="flex items-center gap-2 lg:hidden">
+          <LangSwitch lang={lang} setLang={setLang} compact />
           {isMounted && (
             <button onClick={toggleTheme} className="p-2 text-[var(--text-secondary)] transition-all hover:text-[var(--accent)]" aria-label="Thème">
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -194,7 +286,7 @@ function TopBar({ hasScrolled, activeSection, isMobileMenuOpen, setIsMobileMenuO
             <motion.a initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }}
               href="#contact" onClick={() => setIsMobileMenuOpen(false)}
               className="mt-8 inline-flex w-fit rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white">
-              Book Me
+              {t.nav.bookMe}
             </motion.a>
           </motion.div>
         )}
@@ -206,6 +298,7 @@ function TopBar({ hasScrolled, activeSection, isMobileMenuOpen, setIsMobileMenuO
 /* ── Main page ─────────────────────────────────────────────────── */
 export default function App() {
   const reduced = useReducedMotion();
+  const { t } = useI18n();
   const [isMounted, setIsMounted]               = useState(false);
   const [theme, setTheme]                       = useState("light");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -227,7 +320,7 @@ export default function App() {
       setShowScrollTop(y > 300);
       const probe = y + window.innerHeight * 0.35;
       let curr = "about";
-      NAV_LINKS.forEach((l) => {
+      NAV_LINK_IDS.forEach((l: { id: string }) => {
         const el = document.getElementById(l.id);
         if (el && probe >= el.offsetTop) curr = l.id;
       });
@@ -270,14 +363,28 @@ export default function App() {
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen overflow-hidden pt-16">
-        {/* Mesh background */}
-        <div className="absolute inset-0 mesh-bg" aria-hidden="true" />
+        {/* Real background image with readability overlay */}
+        <div className="absolute inset-0">
+          <motion.div
+            animate={reduced ? undefined : { scale: [1, 1.05] }}
+            transition={reduced ? undefined : { duration: 24, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+            className="h-full w-full will-change-transform"
+          >
+            <img src={HERO_BG} alt="" className="h-full w-full object-cover object-center" loading="eager" aria-hidden="true" />
+          </motion.div>
+          {/* Gradient left → text area fully readable */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)]/92 via-[var(--bg-primary)]/65 to-[var(--bg-primary)]/15" />
+          {/* Bottom fade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/85 via-transparent to-transparent" />
+          {/* Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.28)_100%)]" />
+        </div>
 
         {/* Grid lines (visible in dark mode) */}
         <GridLines />
 
         {/* Animated gradient orbs */}
-        <FloatingOrbs count={4} />
+        <FloatingOrbs count={3} />
 
         {/* Top-right accent blob */}
         <motion.div
@@ -324,7 +431,7 @@ export default function App() {
               className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
               aria-hidden="true"
             />
-            {HERO_SUBTITLE_LABEL}
+            {t.hero.badge}
           </motion.span>
 
           {/* Name */}
@@ -365,7 +472,7 @@ export default function App() {
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.65 } } }}
             className="max-w-lg text-base leading-relaxed text-[var(--text-secondary)] md:text-lg"
           >
-            {HERO_TAGLINE}
+            {t.hero.tagline}
           </motion.p>
 
           {/* CTAs */}
@@ -379,7 +486,7 @@ export default function App() {
               className="glow-pulse inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-md"
               aria-label="Voir mes films">
               <Film className="h-4 w-4" aria-hidden="true" />
-              Voir mes Films
+              {t.hero.cta_films}
             </motion.a>
             <motion.a href="#contact"
               whileHover={reduced ? undefined : { scale: 1.05 }}
@@ -387,7 +494,7 @@ export default function App() {
               className="glass-card inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--accent)] hover:text-[var(--accent)]"
               aria-label="Me contacter">
               <Mail className="h-4 w-4" aria-hidden="true" />
-              Me Contacter
+              {t.hero.cta_contact}
             </motion.a>
           </motion.div>
 
@@ -403,7 +510,7 @@ export default function App() {
                 </span>
               ))}
             </div>
-            <span className="text-sm text-[var(--text-secondary)]">4M+ personnes me suivent</span>
+            <span className="text-sm text-[var(--text-secondary)]">{t.hero.social_proof}</span>
           </motion.div>
         </motion.div>
 
@@ -416,7 +523,7 @@ export default function App() {
           <div className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-glass)] p-2 backdrop-blur-sm">
             <ChevronDown className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
           </div>
-          <span className="font-accent text-[9px] uppercase tracking-[0.28em] text-[var(--text-muted)]">{HERO_SCROLL_TEXT}</span>
+          <span className="font-accent text-[9px] uppercase tracking-[0.28em] text-[var(--text-muted)]">{t.hero.scroll}</span>
         </motion.div>
 
         {/* Stats bar — glassmorphism */}
@@ -426,7 +533,7 @@ export default function App() {
             {HERO_STATS.map((stat, idx) => (
               <div key={stat.key} className="flex snap-start items-center">
                 <div className="shimmer-sweep flex min-w-[155px] items-center gap-2 px-2 md:min-w-0">
-                  <PlatformIcon platform={stat.key} className="h-4 w-4 text-[var(--accent)]" />
+                  <PlatformIcon platform={stat.key} className={`h-4 w-4 ${HERO_BRAND_COLORS[stat.key] ?? "text-[var(--accent)]"}`} />
                   <span className="text-sm font-bold text-[var(--text-primary)]">{stat.count}</span>
                   <span className="text-xs text-[var(--text-muted)]">{stat.label}</span>
                 </div>
@@ -458,11 +565,11 @@ export default function App() {
               <h3 className="font-hero text-3xl text-[var(--accent)]">CLAUDIO NJALLA</h3>
               <p className="mt-1 text-sm text-[var(--text-muted)]">Comedian · Influencer · Actor · Musician</p>
             </div>
-            <p className="max-w-sm text-sm italic text-[var(--text-secondary)]">"{FOOTER_QUOTE}"</p>
+            <p className="max-w-sm text-sm italic text-[var(--text-secondary)]">"{t.footer.quote}"</p>
           </div>
           <div className="mt-8 flex flex-col gap-2 border-t border-[var(--border-card)] pt-5 text-xs text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
-            <span>© 2026 Claudio Njalla. Tous droits réservés.</span>
-            <span>Made with care in Cameroon</span>
+            <span>© 2026 Claudio Njalla. {t.footer.rights}</span>
+            <span>{t.footer.made}</span>
           </div>
         </div>
       </footer>

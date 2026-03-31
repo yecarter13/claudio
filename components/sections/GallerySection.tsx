@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { GALLERY_ALBUMS, GALLERY_CATEGORIES, type GalleryAlbum } from "@/lib/data";
+import { useI18n } from "@/lib/i18n/context";
 import { RevealSection } from "@/components/ui/RevealSection";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
@@ -128,6 +129,7 @@ function Lightbox({ album, startIndex, onClose }: {
 
 /* ── Album card ── */
 function AlbumCard({ album, onClick }: { album: GalleryAlbum; onClick: () => void }) {
+  const { t } = useI18n();
   return (
     <motion.button
       variants={fadeUp}
@@ -150,7 +152,7 @@ function AlbumCard({ album, onClick }: { album: GalleryAlbum; onClick: () => voi
         <div className="absolute inset-0 flex items-center justify-center bg-[var(--accent)]/0 transition-all duration-300 group-hover:bg-[var(--accent)]/70">
           <div className="flex flex-col items-center gap-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
             <Images className="h-8 w-8 text-white" aria-hidden="true" />
-            <span className="text-sm font-semibold text-white">Voir la galerie</span>
+            <span className="text-sm font-semibold text-white">{t.gallery.open}</span>
           </div>
         </div>
         {/* Photo count badge */}
@@ -177,7 +179,8 @@ function AlbumCard({ album, onClick }: { album: GalleryAlbum; onClick: () => voi
 
 /* ── Main section ── */
 export function GallerySection() {
-  const [activeCategory, setActiveCategory] = useState<string>("Tous");
+  const { t } = useI18n();
+  const [activeCategory, setActiveCategory] = useState<string>(t.gallery.all);
   const [openAlbum, setOpenAlbum]           = useState<GalleryAlbum | null>(null);
 
   const filtered = activeCategory === "Tous"
@@ -193,14 +196,14 @@ export function GallerySection() {
   return (
     <RevealSection id="galerie" className="relative py-20 md:py-28" style={{ background: "var(--bg-secondary)" }}>
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionLabel>GALERIE</SectionLabel>
+        <SectionLabel>{t.gallery.label}</SectionLabel>
 
         <motion.h2 variants={fadeUp} className="font-display mt-6 text-4xl font-bold text-[var(--text-primary)] md:text-6xl">
-          En images,{" "}
-          <span className="gradient-text">en coulisses.</span>
+          {t.gallery.heading}{" "}
+          <span className="gradient-text">{t.gallery.accent}</span>
         </motion.h2>
         <motion.p variants={fadeUp} className="mt-4 max-w-2xl text-[var(--text-secondary)]">
-          Cliquez sur une galerie pour parcourir toutes les photos.
+          {t.gallery.sub}
         </motion.p>
 
         {/* Category filters */}

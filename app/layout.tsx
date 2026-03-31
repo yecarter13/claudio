@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Outfit, Space_Grotesk, Sora } from "next/font/google";
+import { I18nProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -46,7 +47,7 @@ export default function RootLayout({
         className="flex min-h-full flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-500"
         suppressHydrationWarning
       >
-        {children}
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );

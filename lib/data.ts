@@ -30,7 +30,7 @@ export const ABOUT = {
     "Représenter la créativité africaine sur la scène mondiale — avec authenticité, humour et talent.",
   mission:
     "Divertir, inspirer et connecter les gens à travers le contenu, la musique et le cinéma.",
-  photo: "https://placehold.co/600x700/141414/D4AF37?text=Claudio+Njalla",
+  photo: "/accueil2.jpeg",
 } as const;
 
 /* ── FILMS ─────────────────────────────────────────────────────── */
@@ -233,18 +233,19 @@ export const CHART_DATA = PLATFORMS.map((p) => ({
 export const PARTNERS = [
   {
     name: "Tecno Cameroun",
-    logo: "/partenariat-tecno.jpeg",
+    logo: "/tecno.png",
     type: "Ambassadeur de marque",
     description:
       "Campagne de promotion des smartphones Tecno auprès de la communauté jeune camerounaise.",
     category: "Tech",
   },
   {
-    name: "Partenaire 2",
-    logo: "https://placehold.co/120x60/141414/FF6B00?text=BRAND+2",
-    type: "Placement de produit",
-    description: "Intégration naturelle dans les contenus vidéo et les émissions.",
-    category: "FMCG",
+    name: "1xBet",
+    logo: "/1xbet.png",
+    type: "Partenariat sponsoring",
+    description:
+      "Collaboration avec la plateforme de paris sportifs 1xBet — visibilité auprès d'une audience de millions de fans.",
+    category: "Sport & Betting",
   },
   {
     name: "Partenaire 3",
