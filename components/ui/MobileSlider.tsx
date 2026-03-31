@@ -1,11 +1,20 @@
 "use client";
-// Swiper — loaded only client-side, never on SSR
-// This keeps the mobile bundle lean and avoids hydration issues
 import { useEffect, useRef } from "react";
 
 interface Slide {
   key: string;
   content: React.ReactNode;
+}
+
+// Inject Swiper CSS once via a <link> tag — avoids dynamic import type issues
+function injectSwiperCSS() {
+  if (typeof document === "undefined") return;
+  if (document.getElementById("swiper-css")) return;
+  const link = document.createElement("link");
+  link.id = "swiper-css";
+  link.rel = "stylesheet";
+  link.href = "https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css";
+  document.head.appendChild(link);
 }
 
 export function MobileSlider({ slides, className }: { slides: Slide[]; className?: string }) {
@@ -15,10 +24,10 @@ export function MobileSlider({ slides, className }: { slides: Slide[]; className
     let instance: { destroy: () => void } | null = null;
 
     async function init() {
+      injectSwiperCSS();
+
       const { Swiper } = await import("swiper");
       const { Pagination, A11y } = await import("swiper/modules");
-      await import("swiper/css");
-      await import("swiper/css/pagination");
 
       if (!swiperRef.current) return;
 
