@@ -40,8 +40,9 @@ const NAV_LINK_IDS = [
 ] as const;
 
 
-const HERO_BG     = "/";
-const HERO_CUTOUT = "/acceuil1.jpeg";
+const HERO_BG        = "/acceuil1.jpeg";
+const HERO_BG_MOBILE = "/acceuil1.jpeg";
+const HERO_CUTOUT    = "/background.jpeg";
 
 const HERO_STATS = [
   { key: "tiktok",    label: "TikTok",    count: "2.4M" },
@@ -371,7 +372,10 @@ export default function App() {
             transition={reduced ? undefined : { duration: 24, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
             className="h-full w-full will-change-transform"
           >
-            <img src={HERO_BG} alt="" className="h-full w-full object-cover object-center" loading="eager" aria-hidden="true" />
+            <picture>
+              <source media="(max-width: 767px)" srcSet={HERO_BG_MOBILE} />
+              <img src={HERO_BG} alt="" className="h-full w-full object-cover object-[center_15%]" loading="eager" aria-hidden="true" />
+            </picture>
           </motion.div>
           {/* Gradient left → text area fully readable */}
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)]/92 via-[var(--bg-primary)]/65 to-[var(--bg-primary)]/15" />
@@ -411,7 +415,7 @@ export default function App() {
           transition={reduced ? undefined : { duration: 1.2, delay: 0.3, ease: "easeOut" }}
           src={HERO_CUTOUT}
           alt="Portrait de Claudio Njalla"
-          className="absolute bottom-0 right-0 z-[1] h-[45vh] object-contain opacity-20 md:h-[86vh] md:opacity-90"
+          className="absolute bottom-0 right-0 z-[1] hidden h-[86vh] object-contain md:block md:opacity-90"
           style={{ filter: "drop-shadow(0 0 60px rgba(var(--accent-rgb),0.30))", opacity: 0.88 }}
         />
 

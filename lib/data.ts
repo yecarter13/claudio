@@ -150,9 +150,7 @@ export const SHOWS = [
     href: "https://www.youtube.com/watch?v=lB3W8jIuaHQ",
     episodes: [
       { label: "Épisode 1", href: "https://www.youtube.com/watch?v=lB3W8jIuaHQ" },
-      { label: "Épisode 95", href: "https://www.youtube.com/watch?v=x_Dxl2liqEY" },
       { label: "Part 20", href: "https://www.youtube.com/watch?v=JPqdXWIlF3k" },
-      { label: "Speed Date", href: "https://www.youtube.com/watch?v=uXn7IOkrapk" },
     ],
     tags: ["Dating", "Jeu", "Entertainment"],
   },
@@ -168,7 +166,6 @@ export const SHOWS = [
     href: "https://youtu.be/Gjhv9Rmcb1Y",
     episodes: [
       { label: "1 VS Many", href: "https://www.youtube.com/watch?v=O1GhYFjYdDg" },
-      { label: "Maa Jacky", href: "https://www.youtube.com/watch?v=yK4i69D2490" },
     ],
     tags: ["Talk-Show", "Entertainment", "Interview"],
   },
