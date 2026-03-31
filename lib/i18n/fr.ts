@@ -1,4 +1,55 @@
-export const fr = {
+export interface Translations {
+  nav: {
+    about: string; films: string; music: string; shows: string;
+    digital: string; contact: string; bookMe: string;
+  };
+  hero: {
+    badge: string; tagline: string; cta_films: string; cta_contact: string;
+    social_proof: string; scroll: string;
+  };
+  about: {
+    label: string; heading: string; name: string;
+    parcours: string; vision: string; mission: string;
+  };
+  films: {
+    label: string; heading: string; accent: string;
+    sub: string; watch: string; teaser: string;
+  };
+  music: {
+    label: string; heading: string; accent: string; sub: string;
+  };
+  shows: {
+    label: string; heading: string; accent: string;
+    sub: string; watch: string; objectif: string;
+  };
+  digital: {
+    label: string; heading: string; accent: string; sub: string; chart: string;
+  };
+  partners: {
+    label: string; heading: string; accent: string; sub: string; cta: string;
+  };
+  services: {
+    label: string; heading: string; accent: string; sub: string;
+  };
+  gallery: {
+    label: string; heading: string; accent: string; sub: string;
+    all: string; open: string; photos: string;
+  };
+  contact: {
+    label: string; heading: string; accent: string; sub: string;
+    email_label: string; phone_label: string; location_label: string;
+    location_value: string; location_sub: string; available: string;
+    form_title: string; form_sub: string; name_placeholder: string;
+    email_placeholder: string; subject_label: string; message_placeholder: string;
+    send: string; sending: string; sent_title: string; sent_sub: string;
+    privacy: string; subjects: readonly string[];
+  };
+  footer: {
+    quote: string; rights: string; made: string;
+  };
+}
+
+export const fr: Translations = {
   nav: {
     about: "À Propos",
     films: "Films",
@@ -111,6 +162,4 @@ export const fr = {
     rights: "Tous droits réservés.",
     made: "Made with care in Cameroon",
   },
-} as const;
-
-export type Translations = typeof fr;
+};
