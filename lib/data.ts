@@ -17,17 +17,17 @@ export const SOCIAL_LINKS = {
 /* ── ABOUT ─────────────────────────────────────────────────────── */
 export const ABOUT = {
   shortBio:
-    "Comédien, acteur, musicien et influenceur camerounais suivi par plus de 4 millions de personnes à travers le monde.",
+    "Acteur, musicien et influenceur camerounais suivi par plus de 4 millions de personnes à travers le monde.",
   parcours: [
     { year: "2018", event: "Premiers sketchs viraux sur Facebook" },
     { year: "2020", event: "Lancement de l'émission Pop The Balloon" },
     { year: "2021", event: "Rôle principal dans Impossible Love" },
     { year: "2022", event: "Sortie du titre musical FIN · 120K de vues" },
-    { year: "2023", event: "Partenariat Tecno Cameroun · 108K abonnés" },
+    { year: "2023", event: "Partenariat Tecno Cameroun · 108K                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      abonnés" },
     { year: "2024", event: "4M+ abonnés toutes plateformes confondues" },
   ],
   vision:
-    "Représenter la créativité africaine sur la scène mondiale — avec authenticité, humour et talent.",
+    "Représenter la créativité africaine sur la scène mondiale — avec authenticité, passion et talent.",
   mission:
     "Divertir, inspirer et connecter les gens à travers le contenu, la musique et le cinéma.",
   photo: "/accueil2.jpeg",
@@ -59,7 +59,7 @@ export const FILMS = [
     title: "MY SISTER'S HUSBAND",
     genre: "Comédie · Famille",
     description:
-      "Une comédie familiale explosive ! Le mari de sa sœur débarque à la maison et tout part en vrille. Claudio au sommet de son art comique dans un film qui fait rire toute la famille.",
+      "Une comédie familiale explosive ! Le mari de sa sœur débarque à la maison et tout part en vrille. Claudio au sommet de son art dans un film qui captive toute la famille.",
     image: "/my-sister-husband.jpeg",
     href: "https://www.youtube.com/watch?v=FhXBJoMkTjA",
     teaser: "https://www.youtube.com/watch?v=CYFKxzmNru4",
@@ -144,7 +144,7 @@ export const SHOWS = [
     description:
       "Des célibataires, des questions piquantes, et un ballon qui peut éclater à tout moment. L'émission de dating la plus imprévisible du Cameroun.",
     objectif:
-      "Divertir et connecter les gens à travers un format de jeu original mêlant rencontres, défis et humour.",
+      "Divertir et connecter les gens à travers un format de jeu original mêlant rencontres, défis et émotions.",
     type: "Émission Dating · Jeu",
     image: "/pop-balloon.jpeg",
     href: "https://www.youtube.com/watch?v=lB3W8jIuaHQ",
@@ -154,13 +154,13 @@ export const SHOWS = [
       { label: "Part 20", href: "https://www.youtube.com/watch?v=JPqdXWIlF3k" },
       { label: "Speed Date", href: "https://www.youtube.com/watch?v=uXn7IOkrapk" },
     ],
-    tags: ["Dating", "Jeu", "Humour"],
+    tags: ["Dating", "Jeu", "Entertainment"],
   },
   {
     title: "Smash or Pass",
     badge: "TALK-SHOW",
     description:
-      "Le concept qui fait débat ! Claudio met ses invités face à des choix impossibles dans une ambiance explosive de rires et de révélations.",
+      "Le concept qui fait débat ! Claudio met ses invités face à des choix impossibles dans une ambiance explosive de révélations et d'émotions.",
     objectif:
       "Créer un espace de divertissement authentique où les personnalités camerounaises peuvent s'exprimer librement.",
     type: "Émission Web · Talk-Show",
@@ -170,7 +170,7 @@ export const SHOWS = [
       { label: "1 VS Many", href: "https://www.youtube.com/watch?v=O1GhYFjYdDg" },
       { label: "Maa Jacky", href: "https://www.youtube.com/watch?v=yK4i69D2490" },
     ],
-    tags: ["Talk-Show", "Humour", "Interview"],
+    tags: ["Talk-Show", "Entertainment", "Interview"],
   },
 ] as const;
 
@@ -181,7 +181,7 @@ export const PLATFORMS = [
     label: "TikTok",
     followers: 2400000,
     display: "2.4M",
-    contentType: "Sketchs comiques, challenges, tendances",
+    contentType: "Sketchs, challenges, tendances",
     color: "#ffffff",
     href: SOCIAL_LINKS.tiktok,
   },
@@ -279,7 +279,7 @@ export const SERVICES = [
   {
     title: "Événementiel",
     description:
-      "Animation d'événements, galas, lancements de produits, conférences — Claudio apporte son énergie et son humour.",
+      "Animation d'événements, galas, lancements de produits, conférences — Claudio apporte son énergie et sa présence.",
     features: ["Animation de soirées", "Lancements produits", "Galas & cérémonies"],
   },
 ] as const;

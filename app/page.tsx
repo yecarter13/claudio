@@ -24,11 +24,11 @@ const ContactSection      = dynamic(() => import("@/components/sections/ContactS
 const HERO_TITLE_FIRST    = "CLAUDIO";
 const HERO_TITLE_LAST     = "NJALLA";
 const HERO_SUBTITLE_LABEL = "Cameroonian Creator · Entertainment · Culture";
-const HERO_TAGLINE        = "Je suis là pour vous divertir, vous faire rire, et vous faire vivre des émotions authentiques. Cameroun dans le cœur, le monde dans ma vision.";
+const HERO_TAGLINE        = "Je suis là pour vous divertir, vous faire vivre des émotions authentiques et vous inspirer. Cameroun dans le cœur, le monde dans ma vision.";
 const HERO_SCROLL_TEXT    = "Découvrir";
 const FOOTER_QUOTE        = "Merci d'être passé. Revenez souvent — j'ai toujours quelque chose de nouveau à vous montrer.";
 
-const TYPEWRITER_ROLES = ["Comedian", "Influencer", "Actor", "Music Artist"] as const;
+const TYPEWRITER_ROLES = ["Influencer", "Actor", "Music Artist", "Creator"] as const;
 
 const NAV_LINK_IDS = [
   { id: "about",     key: "about"   },
@@ -563,7 +563,7 @@ export default function App() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h3 className="font-hero text-3xl text-[var(--accent)]">CLAUDIO NJALLA</h3>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">Comedian · Influencer · Actor · Musician</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">Influencer · Actor · Musician</p>
             </div>
             <p className="max-w-sm text-sm italic text-[var(--text-secondary)]">"{t.footer.quote}"</p>
           </div>

@@ -29,9 +29,9 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Claudio Njalla | Influencer, Comedian, Actor & Musician",
+  title: "Claudio Njalla | Influencer, Actor & Musician",
   description:
-    "Site officiel de Claudio Njalla — humoriste, influenceur, acteur et musicien camerounais suivi par plus de 4 millions de personnes.",
+    "Site officiel de Claudio Njalla — acteur, influenceur et musicien camerounais suivi par plus de 4 millions de personnes.",
 };
 
 export default function RootLayout({
